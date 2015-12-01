@@ -1,0 +1,15 @@
+.*
+*.o
+*.o.*
+*.a
+*.s
+*.ko
+*.so
+*.bz2
+*.gz
+*~
+build/
+cscope.*
+ncscope.*
+!.gitignore
+

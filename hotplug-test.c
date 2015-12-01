@@ -30,20 +30,22 @@ void MonitorNetlinkUevent()
 	msg.msg_iovlen=1;
 
 	sockfd=socket(AF_NETLINK,SOCK_RAW,NETLINK_KOBJECT_UEVENT);
-	if(sockfd==-1)
+	if (sockfd==-1)
 		printf("socket creating failed:%s\n",strerror(errno));
-	if(bind(sockfd,(struct sockaddr *)&sa,sizeof(sa))==-1)
+	if (bind(sockfd,(struct sockaddr *)&sa,sizeof(sa))==-1)
 		printf("bind error:%s\n",strerror(errno));
 
-	len=recvmsg(sockfd,&msg,0);
-	if(len<0)
-		printf("receive error\n");
-	else if(len<32||len>sizeof(buf))
-		printf("invalid message");
-	for(i=0;i<len;i++)
-		if(*(buf+i)=='\0')
-			buf[i]='\n';
-	printf("received %d bytes\n%s\n",len,buf);
+	//while (1){
+		len=recvmsg(sockfd,&msg,0);
+		if (len<0)
+			printf("receive error\n");
+		else if (len<32||len>sizeof(buf))
+			printf("invalid message");
+		for (i=0;i<len;i++)
+			if(*(buf+i)=='\0')
+				buf[i]='\n';
+		printf("received %d bytes\n%s\n",len,buf);
+	//}
 }
 
 int main(int argc,char **argv)
